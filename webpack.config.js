@@ -7,13 +7,16 @@ const webpack = require('webpack');
 module.exports = {
   entry: '/src/index.js',
   output: {
+    publicPath: 'auto',
     path:path.resolve(__dirname, "dist"),
-    filename: "[conenthash].js",
+    filename: "[contenthash].js",
+    clean: true
   },
   mode: 'development',
   devServer: {
     static: './dist',
     hot: true,
+    historyApiFallback: true 
   },
   devtool: 'inline-source-map',
   module: {
@@ -41,12 +44,11 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
-    new MiniCssExtractPlugin({
-      filename: "[name].css"
-    }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      inject: true,
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css"
     }),
     new webpack.DefinePlugin({
       __VUE_OPTIONS_API__: true,

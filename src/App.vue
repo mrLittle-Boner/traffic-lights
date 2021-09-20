@@ -1,20 +1,15 @@
 <template>
-  <div>
-    <h1>I`am Root Component</h1>
-    <p>{{ helloMessage }}</p>
-  </div>
+  <router-view></router-view>
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+import { onMounted } from '@vue/runtime-core'
+import { useRouter } from 'vue-router'
 export default {
-  setup() {
-    const helloMessage = ref('Privet Andrey');
-
-    return {
-      helloMessage,
-    }
-  },
+  setup(){
+    const router = useRouter();
+    onMounted(() => { if(router.options.history.location === '/') router.push('green') });
+  }
 }
 </script>
 
